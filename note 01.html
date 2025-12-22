@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INTUS – Metacognition Laboratory</title>
+  <meta name="description" content="An independent research initiative investigating contradiction-driven epistemic reasoning, structured memory, and neurosymbolic approaches to AI cognition.">
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 820px;
+      margin: 4rem auto;
+      padding: 0 1rem 4rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fafafa;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #e5e5e5; background: #111; }
+    }
+    h1 { font-size: 2.1rem; margin-bottom: 0.25rem; }
+    h2 { margin-top: 2.5rem; font-size: 1.3rem; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 0.5rem; }
+    h3 { margin-top: 2rem; font-size: 1.1rem; color: #444; }
+    @media (prefers-color-scheme: dark) {
+        h2 { border-bottom-color: rgba(255,255,255,0.05); }
+        h3 { color: #ccc; }
+    }
+    .tagline {
+      color: #555;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .tagline { color: #aaa; }
+    }
+    p { font-size: 0.98rem; margin-bottom: 1rem; }
+    ul {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+      font-size: 0.95rem;
+    }
+    li { margin-bottom: 0.4rem; }
+    a {
+      color: #0056b3;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 86, 179, 0.25);
+      padding-bottom: 1px;
+    }
+    a:hover { border-bottom-color: rgba(0, 86, 179, 0.8); }
+    @media (prefers-color-scheme: dark) {
+      a {
+        color: #7cb4ff;
+        border-bottom-color: rgba(124, 180, 255, 0.4);
+      }
+      a:hover { border-bottom-color: rgba(124, 180, 255, 0.9); }
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 2.5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .note { color: #999; }
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.1);
+      color: #555;
+    }
+    @media (prefers-color-scheme: dark) {
+      .badge { border-color: rgba(255,255,255,0.15); color: #bbb; }
+    }
+    hr { border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 4rem 0; }
+    @media (prefers-color-scheme: dark) { hr { border-top-color: rgba(255,255,255,0.1); } }
+    pre {
+      background: rgba(0,0,0,0.03);
+      padding: 1rem;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      border-radius: 4px;
+    }
+    @media (prefers-color-scheme: dark) { pre { background: rgba(255,255,255,0.05); } }
+  </style>
+</head>
+<body>
+
+  <h1>INTUS – Metacognition Laboratory</h1>
+  <p class="tagline">
+    An independent research initiative investigating contradiction-driven epistemic reasoning
+    and neurosymbolic approaches to AI cognition.
+  </p>
+
+  <span class="badge">Laboratory Overview</span>
+
+  <h2>Our Mission</h2>
+  <p>
+    We investigate how an artificial system might detect contradictions, generate hypotheses,
+    integrate them into memory, and track how those internal structures evolve. Our research pipeline 
+    approaches reasoning as a regulated feedback process: tensions in input trigger hypothesis 
+    generation, hypotheses are tested against accumulated memory, and accepted insights reshape 
+    the system's conceptual space.
+  </p>
+
+  <h2>Core Research Areas</h2>
+  <ul>
+    <li>Abductive reasoning and hypothesis generation</li>
+    <li>Contradiction-driven inference and belief revision</li>
+    <li>Ontology-grounded reasoning and semantic drift</li>
+    <li>Epistemic stability and meta-level control mechanisms</li>
+  </ul>
+
+  <hr>
+
+  <h3>Research Note 01</h3>
+  <h1>Why Contradiction Is Not an Error in Reasoning</h1>
+  
+  <span class="badge">Conceptual · Pre-experimental · v0.1</span>
+  
+  <p style="margin-top:1.5rem;"><strong>Author:</strong> Kristjan Gorenc<br>
+  <strong>Affiliation:</strong> INTUS – Metacognition Laboratory (Slovenia)<br>
+  <strong>Last updated:</strong> 2025-12-22</p>
+
+  <h2>Abstract</h2>
+  <p>
+    Contradiction is conventionally understood as a terminal failure state—a signal that
+    reasoning has broken down. Classical logic embodies this intuition through the
+    Principle of Explosion (<em>P</em>, ¬<em>P</em> ⊢ <em>Q</em>): from contradictory premises,
+    anything follows. Yet across the philosophy of science, medical practice, and
+    engineering, we observe systematic patterns where contradictions are not only tolerated
+    but can be functionally necessary for progress.
+  </p>
+  <p>
+    This note argues that the puzzle dissolves when we distinguish <strong>logical contradiction</strong>
+    (a formal property of statements) from <strong>epistemic contradiction</strong>
+    (a functional state of inquiry under uncertainty). We suggest that systems which
+    eliminate epistemic contradictions prematurely tend to become brittle, while systems
+    that maintain them strategically can exhibit more robust inquiry and revision.
+  </p>
+
+  <h2>1. The Logic–Reasoning Divorce</h2>
+  <p>
+    A key clarification follows Gilbert Harman’s insight that <strong>logic is not the same as reasoning</strong>.
+    Logic studies relations of consequence among propositions; reasoning concerns how an
+    agent updates beliefs over time in response to evidence, conflict, and limited resources.
+  </p>
+  <ul>
+    <li><strong>Formal logic</strong> emphasizes truth-preservation and consequence.</li>
+    <li><strong>Human reasoning</strong> emphasizes justification, revision, and inquiry management.</li>
+    <li><strong>Inconsistency</strong> is fatal to certain formal systems, but in inquiry it often triggers belief revision rather than collapse.</li>
+  </ul>
+
+  <h2>2. Case Studies: Productive Inconsistency</h2>
+
+  
+
+[Image of the double-slit experiment interference pattern]
+
+
+  <h3>2.1 Physics: Living in the Contradiction</h3>
+  <p>
+    The transition from classical to quantum physics was a sustained period of “living with” incompatible models.
+  </p>
+  <ul>
+    <li><strong>Planck (1900):</strong> Historically described as a forced move driven by empirical tension, quantization addressed contradictions between classical theory and blackbody radiation data.</li>
+    <li><strong>Einstein (1905–1927):</strong> For decades, light was treated as both wave-like and particle-like, serving as a pragmatic dual modeling strategy.</li>
+  </ul>
+
+  <h3>2.2 Geology: The Cost of Suppression</h3>
+  <p>
+    Alfred Wegener (1912) assembled evidence for continental drift, but it was broadly rejected partly because a convincing physical mechanism was missing. Treating the absence of mechanism as decisive can suppress inquiry; the eventual emergence of plate tectonics resolved the tension, but only after decades of lost time.
+  </p>
+
+  <h2>3. Applied Domains: Medicine &amp; Engineering</h2>
+
+  <h3>3.1 Medicine: “Rule Out” Culture</h3>
+  <p>
+    In clinical reasoning, contradiction is institutionalized through <strong>differential diagnosis</strong>.
+    Clinicians hold mutually exclusive hypotheses simultaneously until evidence resolves the conflict. A major contributor to diagnostic error is <strong>premature closure</strong>: settling on one explanation too early and ceasing hypothesis search.
+  </p>
+
+  
+
+  <h3>3.2 Engineering: The Art of Satisficing</h3>
+  <p>
+    Herbert Simon argued that problem solving often aims at “satisficing” rather than global optimization:
+    engineers manage contradictions among cost, safety, and performance. Conversely, <strong>normalization of deviance</strong>—where warning signals are reinterpreted as acceptable drift—can lead to institutional failure, as seen in the Challenger disaster analysis.
+  </p>
+
+  
+
+  <h2>4. Toward a Functional View: Contradiction as Signal</h2>
+  <p>
+    Epistemic contradictions serve as informative signals that direct attention to where revision is needed. Their functional roles include:
+  </p>
+  <ul>
+    <li><strong>Boundary detection:</strong> Marking where the current model hits the “wall” of reality.</li>
+    <li><strong>Evidence accumulation:</strong> Acting as a pause signal that prevents premature commitment.</li>
+    <li><strong>Framework revision:</strong> Signaling the need for deeper conceptual change.</li>
+  </ul>
+
+  <p><em>The pain analogy:</em> Just as physical pain signals tissue damage without being the damage itself, epistemic contradiction signals model inadequacy without being a reasoning failure.</p>
+
+  <h2>How to cite</h2>
+  <pre>
+Gorenc, K. (2025). Why Contradiction Is Not an Error in Reasoning (Research Note 01, v0.1).
+INTUS – Metacognition Laboratory. https://intusmetacognition.org
+  </pre>
+
+  <hr>
+
+  <h2>Contact</h2>
+  <p>
+    For research inquiries or collaboration proposals, please write to:<br>
+    <a href="mailto:lab@intusmetacognition.org">lab@intusmetacognition.org</a>
+  </p>
+
+  <p class="note">
+    INTUS is an independent metacognition laboratory based in Slovenia, focusing on epistemic
+    AI and cognitive architectures.
+  </p>
+
+</body>
+</html>
