@@ -3,27 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Why Contradiction Is Not an Error in Reasoning — v0.1</title>
-  <meta name="description" content="A conceptual research note arguing that epistemic contradictions function as inquiry signals rather than reasoning failures." />
+  <title>Why Contradiction Is Not an Error in Reasoning</title>
+  <meta name="description" content="A research note distinguishing logical contradiction from epistemic contradiction in inquiry under uncertainty." />
   <style>
-    :root { --max: 880px; --fg:#111; --muted:#555; --bg:#fff; --line:#e7e7e7; }
-    body { margin:0; font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--fg); background:var(--bg); }
+    :root { --max: 720px; --fg:#1a1a1a; --muted:#666; --bg:#fff; --line:#ddd; --accent:#0066cc; }
+    body { margin:0; font:18px/1.7 Georgia, Cambria, "Times New Roman", serif; color:var(--fg); background:var(--bg); }
     header, main, footer { max-width:var(--max); margin:0 auto; padding:24px 18px; }
-    header { padding-top:34px; padding-bottom:18px; border-bottom:1px solid var(--line); }
-    h1 { margin:0 0 8px 0; font-size:1.9rem; line-height:1.15; letter-spacing:-0.01em; }
-    .meta { color:var(--muted); font-size:0.98rem; }
-    .meta div { margin:2px 0; }
-    main { padding-top:22px; }
-    h2 { margin:26px 0 10px; font-size:1.25rem; }
-    p { margin:10px 0; }
-    ul { margin:10px 0 10px 20px; }
-    li { margin:6px 0; }
-    .callout { border:1px solid var(--line); border-left:4px solid #111; padding:12px 14px; margin:14px 0; background:#fafafa; }
-    .small { font-size:0.95rem; color:var(--muted); }
-    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-    pre { background:#f6f6f6; border:1px solid var(--line); padding:10px 12px; overflow:auto; }
-    footer { border-top:1px solid var(--line); color:var(--muted); font-size:0.95rem; padding-top:16px; padding-bottom:34px; }
-    a { color:inherit; }
+    header { padding-top:48px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+    h1 { margin:0 0 16px 0; font-size:2rem; line-height:1.2; letter-spacing:-0.02em; font-weight:400; }
+    .meta { color:var(--muted); font-size:0.9rem; font-family: system-ui, sans-serif; margin:12px 0; }
+    .meta div { margin:4px 0; }
+    main { padding-top:32px; }
+    h2 { margin:42px 0 16px; font-size:1.4rem; font-weight:400; }
+    h3 { margin:32px 0 12px; font-size:1.15rem; font-weight:600; }
+    p { margin:16px 0; }
+    .distinction { 
+      border-left:3px solid var(--accent); 
+      padding:16px 20px; 
+      margin:24px 0; 
+      background:#f8f9fa;
+      font-size:0.95rem;
+    }
+    .distinction p { margin:10px 0; }
+    .note { 
+      background:#fffbf0; 
+      border:1px solid #e8dcc4; 
+      padding:14px 18px; 
+      margin:20px 0; 
+      font-size:0.95rem;
+    }
+    code { 
+      font-family: "SF Mono", Consolas, monospace; 
+      background:#f4f4f4; 
+      padding:2px 6px; 
+      font-size:0.88em;
+      border-radius:2px;
+    }
+    em { font-style:italic; }
+    .reading { 
+      margin-top:48px; 
+      padding-top:32px; 
+      border-top:1px solid var(--line); 
+      font-size:0.92rem;
+    }
+    .reading h3 { font-size:1.1rem; margin-top:24px; }
+    .reading p { margin:8px 0; line-height:1.5; }
+    footer { 
+      border-top:1px solid var(--line); 
+      color:var(--muted); 
+      font-size:0.88rem; 
+      padding:24px 18px 48px;
+      margin-top:60px;
+      font-family: system-ui, sans-serif;
+    }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
   </style>
 </head>
 
@@ -31,134 +65,198 @@
   <header>
     <h1>Why Contradiction Is Not an Error in Reasoning</h1>
     <div class="meta">
-      <div><strong>Type:</strong> research note 0.1</div>
-      <div><strong>Author:</strong> Kristjan Gorenc</div>
-      <div><strong>Affiliation:</strong> INTUS – Metacognition Laboratory (Slovenia)</div>
-      <div><strong>Last updated:</strong> 2025-12-22</div>
+      <div><strong>Research Note</strong>  Episode 1 of 9</div>
+      <div>Kristjan Gorenc  INTUS Metacognition Laboratory</div>
+      <div>Version </strong> 2025-12-22</div>
     </div>
   </header>
 
   <main>
     <h2>Abstract</h2>
     <p>
-      Contradiction is often treated as a terminal failure state: a sign that reasoning has broken down. Classical logic
-      captures this intuition via the <em>Principle of Explosion</em> (from <code>P</code> and <code>¬P</code>, one may derive any <code>Q</code>),
-      but this “explosion” is a property of <em>classical consequence relations</em> a formal design choice for truth preserving derivation,
-      not a universal law of rational inquiry.
+      Contradiction is often treated as a terminal failure state. Classical logic formalizes this intuition through the Principle of Explosion: from contradictory premises <code>P</code> and <code>¬P</code>, any conclusion <code>Q</code> follows. However, this behavior is a property of specific consequence relations designed for truth preserving derivation, not a universal norm governing rational inquiry.
     </p>
     <p>
-      Across philosophy of science, medicine, and engineering, agents routinely continue to function under unresolved tensions.
-      The puzzle dissolves once we distinguish <strong>logical contradiction</strong> (a formal inconsistency inside a set of statements)
-      from <strong>epistemic contradiction</strong> (a functional state where evidence, models, or constraints support incompatible commitments
-      under uncertainty). Many real world “contradictions” are also better described as <strong>contraries</strong> (they cannot both be true,
-      but can both be false), which further explains why inquiry does not “explode.”
+      Across philosophy of science, medicine, and engineering, agents routinely continue to reason under unresolved tensions. The apparent paradox dissolves once we distinguish <em>logical contradiction</em> (a formal inconsistency within propositions) from <em>epistemic contradiction</em> (a functional state where evidence, models, or constraints support incompatible commitments under uncertainty). Many apparent contradictions are better characterized as contrarieties: claims that cannot both be true but may both be false.
     </p>
     <p>
-      We propose that premature elimination of epistemic contradictions tends to create brittle inquiry (premature closure, suppressed anomalies,
-      institutional normalization), while strategic maintenance of tension supports robust revision. We call this productive tension
-      <strong>epistemic friction</strong>: a local loss of coherence that provides traction for learning and model repair.
+      This note argues that premature elimination of epistemic contradictions produces brittle inquiry, manifesting as premature closure, suppressed anomalies, or institutional normalization. Strategic maintenance of unresolved tension supports robust revision and discovery. We refer to this productive tension as <em>epistemic friction</em>, a local loss of coherence that provides traction for learning and model repair.
     </p>
 
-    <div class="callout">
-      <p><strong>Working distinction (minimal):</strong></p>
-      <ul>
-        <li><strong>Logical contradiction:</strong> <code>P ∧ ¬P</code> (in classical logic: inconsistent, explosive under classical consequence).</li>
-        <li><strong>Epistemic contradiction:</strong> a conflict among models/evidence/constraints that signals “the map is incomplete,” not “anything follows.”</li>
-        <li><strong>Contrariety (common in practice):</strong> hypotheses that cannot both be true, yet can both be false (e.g., competing diagnoses).</li>
-      </ul>
+    <div class="distinction">
+      <p><strong>Working Distinctions</strong></p>
+      <p><strong>Logical contradiction:</strong> <code>P ∧ ¬P</code>. In classical logic, inconsistent and explosive under classical consequence.</p>
+      <p><strong>Epistemic contradiction:</strong> A conflict among models, evidence, or constraints indicating incomplete understanding rather than inferential collapse.</p>
+      <p><strong>Contrariety:</strong> Hypotheses that cannot both be true yet can both be false. Common in practice (competing diagnoses, incompatible designs).</p>
     </div>
 
-    <h2>1. The Logic–Reasoning Divorce</h2>
+    <h2>1. The Classical Prohibition</h2>
     <p>
-      A key clarification follows Gilbert Harman’s insight that logic is not the same as reasoning.
-      Logic studies consequence relations among propositions; reasoning concerns how agents update beliefs over time under limited evidence,
-      conflict, and resource constraints.
+      Aristotle declared contradiction as impossible: "It is impossible for the same thing to belong and not to belong at the same time to the same thing and in the same respect." Classical logic operationalizes this through the Principle of Explosion. From <code>P</code> and <code>¬P</code>, any arbitrary conclusion follows. The system collapses into triviality.
     </p>
-    <ul>
-      <li><strong>Formal logic</strong> prioritizes truth-preservation and consequence within a fixed premise set.</li>
-      <li><strong>Reasoning</strong> prioritizes justification, revision, and inquiry management over time.</li>
-      <li>Inconsistency is fatal to certain <em>formal</em> systems; in inquiry it often triggers <em>revision</em>, not collapse.</li>
-    </ul>
-
-    <h2>2. Case Studies: Productive Inconsistency</h2>
-    <p class="small">[Insert image: double-slit interference pattern]</p>
-
-    <h2>2.1 Physics: Living With Incompatible Models</h2>
     <p>
-      The transition from classical to quantum physics involved sustained periods of working with incompatible commitments rather than eliminating them.
-    </p>
-    <ul>
-      <li>
-        <strong>Planck (1900):</strong> quantization emerges as an empirically forced move amid tension between classical expectations and radiation data.
-        (A common retrospective framing invokes the “ultraviolet catastrophe,” but Planck’s immediate problem was fitting the observed spectrum and
-        then finding a derivation that resisted classical continuity assumptions.)
-      </li>
-      <li>
-        <strong>Einstein to early quantum theory (1905–1927):</strong> light is treated as wave-like for interference and particle-like for photoelectric effects,
-        functioning as a pragmatic dual-model regime.
-      </li>
-      <li>
-        <strong>Bohr (1913):</strong> the atomic model combines classical orbital mechanics with quantum jumps—an internally hybrid move that was
-        “inconsistent by construction,” yet scientifically productive.
-      </li>
-    </ul>
-
-    <h2>2.2 Geology: The Cost of Suppressing Tension</h2>
-    <p>
-      Wegener (1912) assembled evidence for continental drift, but the absence of a convincing mechanism was often treated as decisive.
-      Privileging “mechanism now” over “evidence now” can suppress inquiry. The later plate tectonics synthesis resolved the tension,
-      but only after decades of delay.
+      This prohibition is not a metaphysical necessity but a design choice. Explosion is a property of classical consequence relations, not a universal feature of rational inference. The error lies not in using classical logic but in misapplying its norms outside the context they were designed to govern.
     </p>
 
-    <h2>3. Applied Domains: Medicine &amp; Engineering</h2>
-
-    <h2>3.1 Medicine: Differential Diagnosis as Managed Contradiction</h2>
+    <h2>2. The Empirical Counter-Pattern</h2>
     <p>
-      In clinical reasoning, tension is institutionalized through differential diagnosis. Clinicians maintain mutually exclusive hypotheses
-      (often contraries) in parallel until evidence resolves the conflict. A major contributor to diagnostic error is <strong>premature closure</strong>:
-      settling on one explanation too early and halting the search. Under time pressure, <strong>availability bias</strong> can accelerate this collapse
-      by favoring the most recently seen or most salient diagnosis.
+      When we examine actual reasoning in science, medicine, and engineering, we observe systematic patterns where contradictions are not only tolerated but functionally necessary for progress.
     </p>
 
-    <h2>3.2 Engineering: Satisficing and the Dangers of Normalization</h2>
+    <h3>Physics: Working with Incompatible Models</h3>
     <p>
-      Herbert Simon argued that problem solving often aims at <strong>satisficing</strong> rather than global optimization:
-      engineers routinely manage trade offs among cost, safety, and performance. However, when deviations from design assumptions are repeatedly
-      reinterpreted as acceptable drift (<strong>normalization of deviance</strong>), systems can fail catastrophically famously illustrated in analyses
-      of the Challenger disaster.
+Max Planck introduced quantization in 1900 as an empirically forced solution to blackbody radiation data, creating tension with classical electromagnetic theory. Einstein's 1905 photon hypothesis added particle behavior to established wave phenomena, initiating a 22 year period in which physicists pragmatically employed both models: wave like for interference and particle like for discrete energy transfer.
+    </p>
+    <p>
+      Niels Bohr's 1913 atomic model is particularly instructive. It combined classical orbital mechanics with quantum jumps, an internally hybrid construction that was mathematically inconsistent by design yet scientifically generative. Progress depended on maintaining tension long enough for a deeper framework to emerge. The Copenhagen interpretation in 1927 did not eliminate wave-particle duality but reframed it. Physicists still debate interpretations a century later.
     </p>
 
-    <h2>4. Toward a Functional View: Contradiction as Signal</h2>
+    <h3>Geology: The Cost of Suppressing Tension</h3>
     <p>
-      Epistemic contradictions (and contrarieties) can function as <strong>informative signals</strong> directing attention toward model limits and revision targets.
-      This is <strong>epistemic friction</strong>: local incoherence that provides traction for discovery and correction.
+      Alfred Wegener assembled extensive evidence for continental drift in 1912: geometric fit, fossil distribution, geological continuity. The absence of a convincing mechanism was widely treated as decisive against the hypothesis. In 1926, the American Association of Petroleum Geologists organized a symposium explicitly to discredit Wegener's theory. Explanatory coherence was privileged over evidential coherence.
     </p>
-    <ul>
-      <li><strong>Boundary detection:</strong> marks where the current model hits the “wall” of reality.</li>
-      <li><strong>Evidence accumulation:</strong> acts as a pause signal that prevents premature commitment.</li>
-      <li><strong>Framework revision:</strong> signals the need for deeper conceptual change (not merely parameter tuning).</li>
-      <li>
-        <strong>Pain analogy:</strong> just as pain signals tissue damage without being the damage itself, epistemic contradiction signals model inadequacy
-        without itself being a reasoning failure. (Like pain, it can be misleading; its rational value lies in how it is investigated and regulated.)
-      </li>
-    </ul>
+    <p>
+      This illustrates a common failure mode: treating unresolved tension as grounds for rejection rather than as a target for investigation. Plate tectonics resolved the conflict in the 1960s, but only after decades of institutional suppression. The problem was not contradiction in reality but intolerance of epistemic friction.
+    </p>
 
-    <div class="callout">
-      <p><strong>One-line takeaway:</strong> Classical logic treats contradictions as toxic to derivation; real world inquiry treats epistemic conflict as a diagnostic signal for model repair.</p>
+    <h3>Medicine: Differential Diagnosis as Managed Conflict</h3>
+    <p>
+      Clinical reasoning explicitly institutionalizes tension through differential diagnosis. Clinicians maintain mutually exclusive hypotheses, often contrarieties, in parallel while acknowledging that at least one must be false. This practice does not involve endorsing contradictions as true but deliberately suspending premature commitment under uncertainty.
+    </p>
+    <p>
+      A major contributor to diagnostic error is premature closure: settling on a single explanation too early and terminating the search for alternatives. Under time pressure, availability bias can accelerate this collapse by favoring the most salient or recently encountered diagnosis. Unresolved epistemic conflict functions as a protective constraint, preserving sensitivity to disconfirming evidence rather than indicating a failure of rationality.
+    </p>
+
+    <h3>Engineering: Satisficing and Warning Signal Suppression</h3>
+    <p>
+      Herbert Simon argued that real-world problem solving often aims at satisficing rather than global optimization. Engineers routinely manage trade-offs among cost, safety, performance, and feasibility, accepting local compromises under bounded rationality.
+    </p>
+    <p>
+      However, when deviations from design assumptions are repeatedly reinterpreted as acceptable drift, a process known as normalization of deviance, systems become vulnerable to catastrophic failure. The Challenger disaster exemplifies this pattern. Warning signals indicating model reality mismatch, were systematically reabsorbed to preserve apparent coherence rather than treated as prompts for revision. The failure was not the presence of epistemic tension but its progressive erasure.
+    </p>
+
+    <h2>3. Logical vs Epistemic Contradiction</h2>
+    <p>
+      Gilbert Harman observed that logic is not identical to reasoning. Logic studies relations of consequence among propositions. Reasoning concerns how agents revise beliefs over time under limited evidence, conflict, and resource constraints.
+    </p>
+    <p>
+      Formal logic prioritizes truth preservation within a fixed premise set. Reasoning prioritizes justification, revision, and inquiry management across time. Inconsistency is fatal to certain formal systems. In inquiry, it typically initiates revision rather than collapse.
+Epistemic contradiction marks the pre revision state where agents have evidence based commitments but insufficient grounds to determine which to retract.
+    </p>
+    <p>
+      Epistemic contradiction is not mere uncertainty. It arises when an agent is rationally committed, by evidence, models, or constraints, to incompatible commitments, even while recognizing that at least one must be revised. The defining feature is not ignorance but structured conflict among justified commitments. This is why many epistemic contradictions are technically contrarieties rather than strict logical contradictions. Incompatible hypotheses may both be wrong. This is precisely why an explosion does not occur.
+    </p>
+
+    <h2>4. Contradiction as Signal: Epistemic Friction</h2>
+    <p>
+      Epistemic contradictions and contrarieties can function as informative signals, directing attention toward the limits of current models and the need for revision. This is epistemic friction: local incoherence that provides traction for learning.
+    </p>
+
+    <p> 
+<em>Epistemic contradiction</em> names the underlying structural state: an agent               rationally committed to incompatible models or hypotheses. <em>Epistemic friction</em> names its functional role as a control signal in inquiry. When contradictions manifest observably in practice—as disagreement between experts, competing diagnoses, or conflicting model outputs—we can speak of <em>epistemic conflict</em>.
+   </p>
+
+    <p>
+      <strong>Boundary detection.</strong> Marks where a representational framework encounters empirical resistance. Wave-particle duality signaled the boundary of classical concepts. Continental drift indicated the boundary of known mechanisms.
+    </p>
+    <p>
+      <strong>Evidence accumulation.</strong> Acts as a pause signal, preventing premature commitment while uncertainty remains unresolved. Differential diagnosis in medicine prevents premature closure. Conflicting theories in science motivate discriminating experiments.
+    </p>
+    <p>
+      <strong>Framework revision.</strong> Indicates the need for conceptual restructuring, not mere parameter tuning. Persistent contradictions drove the shift from classical to quantum mechanics, from fixed continents to plate tectonics.
+    </p>
+    <p>
+      <strong>Pain analogy.</strong> Just as pain signals tissue damage without constituting the damage itself, epistemic contradiction signals model inadequacy without being a reasoning failure. Like pain, it can mislead. Its rational value lies in how it is investigated, regulated, and integrated into action.
+    </p>
+
+    <div class="note">
+      <p><strong>One-line takeaway:</strong> Classical logic treats contradiction as toxic to derivation. Real-world inquiry treats epistemic conflict as a diagnostic signal for model repair.</p>
     </div>
 
-    
+    <h2>5. Failure Modes</h2>
+    <p>
+      Understanding productive contradiction requires examining how its management fails.
+    </p>
+    <p>
+      <strong>Premature resolution.</strong> Collapsing contradictions before sufficient evidence. In medicine, committing to diagnosis without adequate testing. In science, rejecting theories due to unresolved anomalies. In engineering, dismissing warning signals to maintain schedule.
+    </p>
+    <p>
+      <strong>Silent suppression.</strong> Architectural or institutional mechanisms that hide contradictions. Probabilistic smoothing in AI systems averages away disagreement structure. Organizational normalization of deviance systematically reinterprets signals to preserve coherence. Both create fragility by eliminating the friction that would prompt revision.
+    </p>
+    <p>
+      <strong>Unbounded accumulation.</strong> Maintaining contradictions without resolution mechanisms can produce paralysis or oscillation. The key is regulated tension, not permanent incoherence.
+    </p>
 
-     <h2>Contact</h2>
-      <p>
-        For research inquiries or collaboration proposals, please write to:<br>
-        <a href="mailto:lab@intusmetacognition.org">lab@intusmetacognition.org</a>
-      </p>
+    <h2>6. What This Is Not</h2>
+    <p>
+      This note does not argue that contradictions should be accepted as true, preserved indefinitely, or treated as epistemically harmless. Nor does it propose revising classical logic or replacing it with a non-explosive alternative. The central claim is narrower and methodological: the norms governing formal derivation are not identical to the norms governing inquiry, belief revision, or model management under uncertainty.
+    </p>
+    <p>
+      The presence of an epistemic contradiction does not entail endorsement of both sides as true. Rather, it reflects a situation in which an agent is rationally committed, by evidence, models, or constraints, to incompatible commitments while recognizing that at least one must eventually be revised. The contradiction marks a failure of the current representational framework, not a license to infer arbitrarily.
+    </p>
+    <p>
+      Nothing in this argument challenges the validity of classical logic within its intended domain. The Principle of Explosion remains a correct characterization of consequence relations under classical semantics. The error arises only when such consequence relations are treated as normative rules for inquiry itself rather than as tools for evaluating derivations from fixed premises.
+    </p>
+    <p>
+      This position should not be confused with dialetheism, which holds that some contradictions are genuinely true. The present account makes no such ontological claim. Epistemic contradictions are provisional and defeasible states of inquiry. Their value lies not in being maintained as truths but in guiding attention toward points of model strain, evidential conflict, or conceptual inadequacy. Contradictions are tolerated as signals, not endorsed as facts.
+    </p>
 
+    <h2>7. Scope</h2>
+    <p>
+      This note does not deny that reality is non-contradictory. It makes no claim about whether contradictions exist in the physical world. The argument is strictly epistemic: agents may be rationally committed to incompatible models or hypotheses under conditions of limited evidence, even while recognizing that at least one must be false. In such cases, the contradiction does not reflect a defect in reality but a limitation of the agent's current representational framework.
+    </p>
+    <p>
+      The claim operates at the level of inquiry policy, not formal logic. The choice to tolerate, investigate, or immediately resolve epistemic tension is a higher-level decision that belongs to reasoning strategy rather than derivational rules. Contradictions are toxic to derivation under certain logics but indispensable to inquiry as indicators of model strain. Treating the former as normative for the latter constitutes a category error.
+    </p>
+
+    <h2>8. Conclusion</h2>
+    <p>
+      Treating all epistemic conflict as logical error presupposes that agents always have access to the correct premises and conceptual resources required for immediate resolution. In real inquiry, this assumption fails systematically. Contradictions persist not because reasoners are irrational but because models are incomplete, evidence is ambiguous, and frameworks are provisional.
+    </p>
+    <p>
+      The challenge is not to eliminate contradiction but to recognize when it signals genuine model inadequacy versus when it reflects premature formalization. Systems that suppress epistemic friction prematurely, whether through institutional pressure or architectural design, lose the signals that would prompt necessary revision. Systems that maintain tension strategically preserve the plasticity required for discovery.
+    </p>
+    <p>
+      Contradiction is not failure. It is signal.
+    </p>
+
+    <div class="reading">
+      <h3>Reading List</h3>
+      
+      <p><strong>Philosophy of Science</strong></p>
+      <p>Kuhn, T. S. (1962). <em>The Structure of Scientific Revolutions</em>. University of Chicago Press.</p>
+      <p>Lakatos, I. (1976). <em>Proofs and Refutations</em>. Cambridge University Press.</p>
+      <p>Popper, K. R. (1959). <em>The Logic of Scientific Discovery</em>. Hutchinson & Co.</p>
+      
+      <p><strong>Belief Revision and Logic</strong></p>
+      <p>Alchourrón, C., Gärdenfors, P., & Makinson, D. (1985). On the logic of theory change: Partial meet contraction and revision functions. <em>Journal of Symbolic Logic</em>, 50(2), 510-530. [AGM belief revision]</p>
+     <p>Gärdenfors, P. (1988). <em>Knowledge in Flux: Modeling the Dynamics of Epistemic States</em>. MIT Press.</p>
+     <p>Harman, G. (1986). <em>Change in View: Principles of Reasoning</em>. MIT Press.</p>
+     <p>Priest, G. (2006). <em>In Contradiction: A Study of the Transconsistent</em> (2nd ed.). Oxford University Press.</p>
+  
+      
+      <p><strong>Cognitive Science and Medicine</strong></p>
+      <p>Croskerry, P. (2003). The importance of cognitive errors in diagnosis. <em>Academic Medicine</em>, 78(8), 775-780.</p>
+      <p>Elstein, A. S., Shulman, L. S., & Sprafka, S. A. (1978). <em>Medical Problem Solving</em>. Harvard University Press.</p>
+      <p>Groopman, J. (2007). <em>How Doctors Think</em>. Houghton Mifflin.</p>
+      <p>Johnson-Laird, P. N. (1983). <em>Mental Models</em>. Harvard University Press.</p>
+      
+      <p><strong>Engineering and Organizational Failure</strong></p>
+      <p>Simon, H. A. (1956). Rational choice and the structure of the environment. <em>Psychological Review</em>, 63(2), 129-138.</p>
+      <p>Vaughan, D. (1996). <em>The Challenger Launch Decision</em>. University of Chicago Press.</p>
+      
+      <p><strong>AI and Uncertainty</strong></p>
+      <p>Jaynes, E. T. (2003). <em>Probability Theory: The Logic of Science</em>. Cambridge University Press.</p>
+      <p>Pearl, J. (2000). <em>Causality</em>. Cambridge University Press.</p>
+    </div>
+
+    <p style="margin-top:40px; padding-top:24px; border-top:1px solid var(--line); font-size:0.92rem;">
+      <strong>Contact:</strong> <a href="mailto:lab@intusmetacognition.org">lab@intusmetacognition.org</a>
+    </p>
   </main>
 
   <footer>
-    <div>© 2025 INTUS – Metacognition Laboratory</div>
+    <div>© 2025 INTUS Metacognition Laboratory</div>
   </footer>
 </body>
 </html>
