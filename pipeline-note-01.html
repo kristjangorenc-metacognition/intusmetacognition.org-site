@@ -1,467 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="INTUS Lab Notes v0.1: A contradiction-preserving diagnostic architecture for contradiction-driven epistemic reasoning">
-    <title>INTUS Lab Notes v0.1</title>
-
-    <link rel="canonical" href="https://intusmetacognition.org/research-note-01.html">
-
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --background: #ffffff;
-            --text-color: #333;
-            --border-color: #e0e0e0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            line-height: 1.7;
-            color: var(--text-color);
-            background: var(--background);
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        header {
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        h1 {
-            font-size: 2.2em;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .subtitle {
-            font-size: 1.05em;
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        .timestamp {
-            font-size: 0.9em;
-            color: #999;
-        }
-
-        h2 {
-            font-size: 1.6em;
-            color: var(--primary-color);
-            margin-top: 50px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        h3 {
-            font-size: 1.3em;
-            color: var(--primary-color);
-            margin-top: 35px;
-            margin-bottom: 15px;
-        }
-
-        p {
-            margin-bottom: 20px;
-        }
-
-        .abstract {
-            background: #f8f9fa;
-            padding: 30px;
-            border-left: 4px solid var(--accent-color);
-            margin: 40px 0;
-            font-size: 1.05em;
-        }
-
-        .invariants {
-            background: #f0f7ff;
-            padding: 25px 30px;
-            border-radius: 5px;
-            margin: 30px 0;
-        }
-
-        .invariants ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .invariants li {
-            padding: 12px 0;
-            padding-left: 30px;
-            position: relative;
-        }
-
-        .invariants li:before {
-            content: "▸";
-            position: absolute;
-            left: 10px;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        .scope-box {
-            background: #fff8e6;
-            border: 2px solid #ffd966;
-            padding: 25px;
-            margin: 35px 0;
-            border-radius: 5px;
-        }
-
-        .scope-box h3 {
-            margin-top: 0;
-            color: #cc8800;
-        }
-
-        .not-claims {
-            background: #ffe6e6;
-            border-left: 4px solid #cc0000;
-            padding: 25px 30px;
-            margin: 35px 0;
-        }
-
-        .not-claims h3 {
-            margin-top: 0;
-            color: #cc0000;
-        }
-
-        .not-claims ul {
-            margin-top: 15px;
-            padding-left: 25px;
-        }
-
-        .not-claims li {
-            margin-bottom: 10px;
-        }
-
-        footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 2px solid var(--border-color);
-            color: #666;
-            font-size: 0.95em;
-        }
-
-        .highlight {
-            background: #fffacd;
-            padding: 2px 6px;
-            border-radius: 3px;
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 20px 15px;
-            }
-
-            h1 {
-                font-size: 1.8em;
-            }
-
-            h2 {
-                font-size: 1.4em;
-            }
-
-            .abstract {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INTUS Pipeline Overview | Contradiction-First Diagnostics</title>
+  <meta name="description" content="INTUS: Contradiction-first diagnostic system for regulatory text analysis in pharmaceutical and compliance domains.">
+  <link rel="canonical" href="https://intusmetacognition.org/pipeline-note-01.html">
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 720px;
+      margin: 4rem auto;
+      padding: 0 1rem 4rem;
+      line-height: 1.6;
+      color: #222;
+      background: #fafafa;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #e5e5e5; background: #111; }
+    }
+    header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #ddd;
+    }
+    @media (prefers-color-scheme: dark) {
+      header { border-bottom-color: #333; }
+    }
+    h1 { 
+      font-size: 2.1rem; 
+      margin-bottom: 0.4rem;
+      font-weight: 400;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 0.3rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .subtitle { color: #aaa; }
+    }
+    .tagline {
+      font-size: 0.95rem;
+      color: #777;
+      font-style: italic;
+    }
+    @media (prefers-color-scheme: dark) {
+      .tagline { color: #999; }
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    p {
+      font-size: 0.98rem;
+      margin-bottom: 1rem;
+    }
+    ul {
+      margin: 0.8rem 0;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
+    }
+    li { 
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .use-case {
+      background: #f5f5f5;
+      padding: 1.2rem 1.5rem;
+      border-left: 3px solid #0056b3;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .use-case {
+        background: #1a1a1a;
+        border-left-color: #7cb4ff;
+      }
+    }
+    .disclaimer {
+      background: #fffbf0;
+      border: 1px solid #e6d899;
+      padding: 1rem 1.2rem;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .disclaimer {
+        background: #1a1a0d;
+        border-color: #4d4d26;
+      }
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #ddd;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      footer {
+        border-top-color: #333;
+        color: #aaa;
+      }
+    }
+    a {
+      color: #0056b3;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 86, 179, 0.25);
+      padding-bottom: 1px;
+    }
+    a:hover {
+      border-bottom-color: rgba(0, 86, 179, 0.8);
+    }
+    @media (prefers-color-scheme: dark) {
+      a {
+        color: #7cb4ff;
+        border-bottom-color: rgba(124, 180, 255, 0.4);
+      }
+      a:hover {
+        border-bottom-color: rgba(124, 180, 255, 0.9);
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>INTUS: A Contradiction-Preserving Diagnostic Architecture</h1>
-        <div class="subtitle"><strong>Lab Notes v0.1</strong></div>
-        <div class="subtitle" style="font-style: normal; color:#777;">
-            A diagnostic architecture for contradiction-driven epistemic reasoning
-        </div>
-        <div class="timestamp">Last updated: February 2026</div>
-    </header>
+  <header>
+    <h1>INTUS</h1>
+    <div class="subtitle">Contradiction-First Diagnostics for Regulatory Text</div>
+    <div class="tagline">Pipeline Overview</div>
+  </header>
 
-    <main>
-        <section class="abstract">
-            <h2 style="margin-top: 0; border: none;">Abstract</h2>
+  <main>
+    <div class="use-case">
+      <strong>Use case:</strong> Detecting semantic tensions between regulatory documents—old vs new law, 
+      guidance vs label, policy vs SOP—in pharmaceutical, medical device, and compliance domains.
+    </div>
 
-            <p>
-                INTUS is a diagnostic reasoning system that analyzes semantic inconsistency by treating
-                <span class="highlight">detected contradictions—rather than tokens or embeddings—as primary computational units</span>.
-                The system operates on top of standard Natural Language Inference (NLI) models, using them solely as bounded detectors
-                of entailment, contradiction, and neutrality between statement pairs.
-            </p>
+    <h2>What It Does</h2>
+    <ul>
+      <li>Flags meaning conflicts between clauses across documents</li>
+      <li>Does not resolve contradictions—preserves tension for human review</li>
+      <li>Surfaces cross-document tensions typically obscured by summarization workflows</li>
+    </ul>
 
-            <p>
-                Contradictions identified by NLI are reified as persistent relational objects and organized into a topological structure that
-                captures their recurrence, connectivity, and stability across paraphrases, documents, and processing cycles. Instead of smoothing
-                inconsistencies through probabilistic aggregation, INTUS preserves them as first-class structure and analyzes their distribution
-                as a semantic pressure field.
-            </p>
+    <h2>How It Works</h2>
+    <ul>
+      <li>Natural Language Inference (NLI) detects semantic relations: entailment, contradiction, neutrality</li>
+      <li>Contradictions become persistent objects, not transient errors</li>
+      <li>Clustered into thematic pressure regions for systematic review</li>
+    </ul>
 
-            <p>
-                The system performs structural compression by clustering and tracking contradiction patterns over time, producing a compact
-                representation of instability in the underlying semantic space. All outputs are model-relative, corpus-bounded, and fully traceable
-                to the originating NLI judgments.
-            </p>
+    <h2>What You Get</h2>
+    <ul>
+      <li>Ranked conflict pairs with full clause traceability</li>
+      <li>Cluster view organized by theme (timeline, access, governance, responsibility)</li>
+      <li>Exportable markdown and HTML reports for audit documentation</li>
+      <li>Negative control checks to detect over-triggering</li>
+    </ul>
 
-            <p>
-                <strong>At its current stage, INTUS functions as a non-generative diagnostic layer:</strong>
-                it does not enforce resolution or collapse of inconsistency, but maintains semantic conflict as an explicit, inspectable signal
-                within the system.
-            </p>
+    <h2>Why Pharma & Compliance Teams Care</h2>
+    <ul>
+      <li><strong>Accelerates change-impact analysis</strong> when regulations shift or guidance updates</li>
+      <li><strong>Improves audit defensibility</strong> by surfacing cross-reference tensions proactively</li>
+      <li><strong>Expands review coverage</strong> beyond manual spot-checking across large document sets</li>
+      <li><strong>Reduces risk</strong> of missing subtle but material conflicts in critical paths</li>
+    </ul>
 
-            <p>
-                All reported contradiction structures remain explicitly linked to the originating source segments
-                (document, section, excerpt) that produced the detector judgment.
-            </p>
-        </section>
+    <div class="disclaimer">
+      <p style="margin: 0;">
+        <strong>Diagnostic only (non-generative).</strong> INTUS does not generate conclusions or 
+        enforce resolutions. All flagged contradictions trace to specific detector judgments and 
+        source text segments. Human reviewers retain full control over interpretation and action.
+      </p>
+    </div>
 
-        <section>
-            <h2>Core Design Invariants</h2>
+    <h2>Current Status</h2>
+    <p>
+      A working demonstration was completed in January 2026 using EU veterinary pharmacovigilance 
+      regulations as a testbed. The system successfully detected cross-document tensions that 
+      traditional compliance workflows would likely miss.
+    </p>
 
-            <p>
-                INTUS behavior is governed by a set of explicit design invariants that define its epistemic scope and constrain all architectural
-                choices.
-            </p>
+    <p>
+      <strong>A full technical manuscript describing the architecture, design invariants, and 
+      reproducibility guarantees is in preparation for arXiv.</strong>
+    </p>
 
-            <p>
-                These invariants define INTUS as a diagnostic substrate rather than a reasoning authority.
-                They constrain what the system is permitted to observe, preserve, and expose.
-            </p>
+    <h2>Collaboration</h2>
+    <p>
+      We welcome contact from:
+    </p>
+    <ul>
+      <li>Regulatory affairs and compliance teams in pharma, medtech, or legal domains</li>
+      <li>Researchers interested in contradiction-aware AI systems</li>
+      <li>Organizations requiring auditable, traceable document analysis workflows</li>
+    </ul>
 
-            <div class="invariants">
-                <ul>
-                    <li><strong>Detector-Boundedness:</strong> INTUS cannot observe or act on semantic relations not produced by its detectors.</li>
-                    <li><strong>No Contradiction Invention:</strong> The system does not generate contradictions beyond detector output.</li>
-                    <li><strong>No Implicit Contradiction Elimination:</strong> Detected contradictions are not removed, averaged, or collapsed by default.</li>
-                    <li><strong>Persistence Across Cycles:</strong> Contradiction objects may persist across reasoning cycles unless explicitly resolved.</li>
-                    <li><strong>Non-Generativity:</strong> INTUS does not generate semantic conclusions, beliefs, or answers.</li>
-                    <li><strong>Traceability:</strong> All structural representations are traceable to specific detector judgments.</li>
-                </ul>
-            </div>
+    <p style="margin-top: 2rem;">
+      <strong>Contact:</strong> <a href="mailto:lab@intusmetacognition.org">lab@intusmetacognition.org</a>
+    </p>
+  </main>
 
-            <p>
-                These invariants differentiate INTUS from consistency-enforcing systems and establish its role as a diagnostic instrument rather than a
-                generative reasoning engine.
-            </p>
-        </section>
-
-        <section>
-            <h2>Conceptual Shift</h2>
-
-            <p>
-                Most contemporary reasoning systems are optimized to produce internally consistent outputs. In doing so, they implicitly suppress,
-                average out, or discard internal inconsistencies during inference or aggregation. While effective for generating coherent responses,
-                this design choice obscures <em>epistemic strain</em>: regions of semantic space where interpretation is unstable, contested, or
-                structurally incompatible.
-            </p>
-
-            <p>
-                INTUS takes a diagnostic approach. Rather than treating inconsistency as an error to be eliminated, it is preserved and analyzed as a
-                <strong>diagnostic signal</strong>. The system addresses the following question:
-            </p>
-
-            <p style="text-align: center; font-style: italic; padding: 20px; font-size: 1.1em;">
-                How can semantic inconsistency be detected, preserved, and accumulated as a first-class structural signal, without requiring its
-                immediate resolution?
-            </p>
-
-            <p>
-                The system is designed to <strong>expose epistemic strain</strong>, not to resolve it. Resolution, adjudication, or belief update are
-                intentionally external to the diagnostic core.
-            </p>
-        </section>
-
-        <section>
-            <h2>Bounded Detection and Compression</h2>
-
-            <p>
-                INTUS is a <strong>detector-driven diagnostic system</strong>. It operates on the outputs of bounded semantic detectors, including but
-                not limited to NLI models. It does not reason directly over text, but over relations exposed by bounded detectors.
-            </p>
-
-            <p>
-                As with any detector-driven system, the structures available to INTUS are constrained by the resolution, biases, and failure modes of
-                the underlying detection mechanisms.
-            </p>
-
-            <p>
-                <strong>INTUS does not claim access to uncompressed semantic space</strong>, nor does it attempt to recover information lost during
-                upstream inference. The contribution lies not in eliminating detector-induced compression, but in reifying detected inconsistency as a
-                persistent structural signal.
-            </p>
-
-            <p>
-                While upstream detectors may collapse uncertainty into discrete judgments, INTUS preserves and organizes these judgments as relational
-                objects, enabling <em>structural compression over failure events</em> rather than probabilistic smoothing over content.
-            </p>
-
-            <p>
-                Improvements in detector fidelity expand the observable inconsistency field without altering the core reasoning architecture. The
-                system's representational power scales with detection quality while remaining explicitly bounded by it.
-            </p>
-        </section>
-
-        <section>
-            <h2>Topological Organization</h2>
-
-            <p>
-                Contradiction objects are not treated as isolated events. INTUS organizes them into a topological structure—a
-                <strong>semantic pressure field</strong>—that captures:
-            </p>
-
-            <ul style="margin-left: 40px; margin-top: 15px;">
-                <li>Recurrence of the same contradiction under paraphrase</li>
-                <li>Connectivity between related contradictions</li>
-                <li>Clustering of contradictions across documents or cycles</li>
-                <li>Temporal persistence and stability</li>
-            </ul>
-
-            <p style="margin-top: 20px;">
-                This topology reflects only detected relations. INTUS does not infer hidden contradictions or extrapolate beyond detector output. The
-                pressure field represents <em>where and how semantic interpretation resists compression into a single stable reading</em>.
-            </p>
-        </section>
-
-        <section>
-            <h2>Relationship to Generative Systems</h2>
-
-            <p>
-                INTUS is not a generative model and does not produce answers, explanations, or conclusions. Its role is diagnostic.
-            </p>
-
-            <p>
-                When coupled to generative systems, INTUS is intended to function as a <strong>bounding and auditing layer</strong>, exposing internal
-                contradictions, unsupported assertions, or epistemic strain in generated outputs.
-            </p>
-
-            <p>
-                Such coupling is optional and external to the architecture described here.
-            </p>
-        </section>
-
-        <div class="scope-box">
-            <h3>Scope of These Notes</h3>
-
-            <p>
-                These notes describe the <strong>diagnostic core only</strong>. The following are explicitly out of scope:
-            </p>
-
-            <ul style="margin-top: 10px; padding-left: 25px;">
-                <li>Resolution mechanisms or enforcement policies</li>
-                <li>Generative coupling or LLM integration (implementation)</li>
-                <li>Belief alignment or normative adjudication</li>
-                <li>Downstream task performance optimization</li>
-            </ul>
-
-            <p style="margin-top: 15px;">
-                Any resolution, prioritization, or intervention applied to contradictions must be governed by external policy layers, intentionally
-                separated from the core diagnostic architecture.
-            </p>
-        </div>
-
-        <div class="not-claims">
-            <h3>What INTUS Does NOT Claim</h3>
-
-            <p>
-                To prevent misinterpretation, INTUS makes <strong>no claims</strong> regarding:
-            </p>
-
-            <ul>
-                <li>Semantic truth or normative correctness</li>
-                <li>Belief alignment or consistency restoration</li>
-                <li>Optimal resolution of contradictions</li>
-                <li>Task performance superiority</li>
-                <li>Access to uncompressed semantic ground truth</li>
-            </ul>
-
-            <p style="margin-top: 15px;">
-                <strong>INTUS is diagnostic, not adjudicative.</strong> It exposes structural instability but does not prescribe how to resolve it.
-            </p>
-        </div>
-
-        <section>
-            <h2>Relationship to Paraconsistent Logic</h2>
-
-            <p>
-                INTUS deliberately preserves detected contradictions as persistent structural objects, which raises questions about its relationship to
-                paraconsistent logic.
-            </p>
-
-            <p>
-                <strong>INTUS does not implement a paraconsistent logic.</strong> All semantic detection mechanisms remain grounded in classical logic
-                assumptions. Contradictions are detected relative to classical entailment, not reinterpreted or weakened at the logical level.
-            </p>
-
-            <p>
-                The distinction lies in <em>where</em> contradiction is handled:
-            </p>
-
-            <ul style="margin-left: 40px; margin-top: 15px;">
-                <li><strong>Paraconsistent logics</strong> alter inference rules to permit inconsistent propositions while redefining entailment.</li>
-                <li><strong>INTUS</strong> treats contradiction as an external control signal. Classical reasoning remains intact; contradictions regulate
-                    which hypotheses may exert influence through architectural gating.</li>
-            </ul>
-
-            <p style="margin-top: 20px;">
-                Explosion is avoided not by changing logic, but by gating effects. INTUS respects the principle of explosion at the logical level while
-                preventing its practical consequences through architectural constraints.
-            </p>
-        </section>
-
-        <section>
-            <h2>Current Status</h2>
-
-            <p>
-                A demonstration implementation was completed in January 2026 focusing on cross-document contradiction detection in regulatory texts.
-            </p>
-
-            <p>
-                The demonstration surfaced cross-document tension regions that are typically obscured by summarization-first or
-                consistency-enforcing workflows.
-            </p>
-
-            <p>
-                Ablation experiments indicate that persistent structural memory produces monotonic accumulation of semantic pressure, and that removing
-                contradiction-specific structure collapses diagnostic visibility. (Updated comparative plots for the current architecture are in
-                regeneration due to ongoing fixes in cross-document closure logic.)
-            </p>
-
-            <p>
-                Next planned work includes typed detector expansion (e.g., numeric, temporal, definitional) and Phase-4 relational claims / predicate
-                lenses, while preserving diagnostic invariants.
-            </p>
-        </section>
-    </main>
-
-    <footer>
-        <p>
-            <strong>A full technical manuscript is in preparation for arXiv.</strong><br>
-            These notes describe the diagnostic core only and reflect the system state as of February 2026.
-        </p>
-
-        <p style="margin-top: 20px;">
-            Return to <a href="index.html">INTUS Metacognition Laboratory</a> ·
-            Contact: <a href="mailto:lab@intusmetacognition.org">lab@intusmetacognition.org</a>
-        </p>
-    </footer>
+  <footer>
+    <p>
+      <a href="index.html">← Return to INTUS Metacognition Laboratory</a>
+    </p>
+    <p style="margin-top: 1rem;">
+      © 2025 INTUS Metacognition Laboratory · Based in Slovenia
+    </p>
+  </footer>
 </body>
 </html>
